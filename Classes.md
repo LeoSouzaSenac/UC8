@@ -219,3 +219,42 @@ public class App {
 Dessa forma, você consegue estender uma classe em Java, reutilizando código e criando hierarquias de classes.
 
 
+### **Jogo de Batalha de Personagens - Herança em Java**
+
+#### Objetivo:
+Nesta atividade, você criará um **jogo de batalha de personagens** utilizando os conceitos de **herança** em Java. O jogo permitirá que diferentes personagens (Guerreiro, Mago e Arqueiro) lutem entre si, aplicando habilidades específicas e demonstrando como classes derivadas herdam propriedades e métodos da classe base. A interação com o jogo será feita através de entradas do usuário utilizando `Scanner`.
+
+#### Requisitos:
+
+1. **Classe Base: `Personagem`**
+   - Crie uma classe chamada `Personagem` que será a classe "pai" dos personagens.
+   - A classe deve conter os seguintes atributos:
+     - `nome`: uma string que armazena o nome do personagem.
+     - `vida`: um valor inteiro que representa a quantidade de vida do personagem.
+     - `ataque`: um valor inteiro que representa o poder de ataque do personagem.
+   - Métodos da classe:
+     - `atacar(Personagem oponente)`: o personagem que chamar este método deverá reduzir a vida do oponente com base no seu valor de ataque.
+     - `estaVivo()`: retorna `true` se o personagem ainda tiver vida (`vida > 0`), ou `false` caso contrário.
+
+2. **Classes Derivadas: `Guerreiro`, `Mago` e `Arqueiro`**
+   - Crie três classes que herdam de `Personagem`: `Guerreiro`, `Mago` e `Arqueiro`.
+   - Cada classe deve possuir um construtor que inicialize os atributos de `Personagem` de maneira específica para cada tipo:
+     - **Guerreiro**: vida = 100, ataque = 15.
+     - **Mago**: vida = 80, ataque = 25.
+     - **Arqueiro**: vida = 90, ataque = 20.
+   - Cada classe pode ter habilidades únicas (por exemplo, o `Mago` pode ter um método `lançarFeitico` que duplica o valor do ataque).
+
+3. **Jogo Interativo**:
+   - Utilize a classe `Scanner` para permitir que o usuário escolha os nomes dos personagens e controle as ações no jogo.
+   - O jogador deve poder:
+     - Escolher qual personagem deseja controlar (Guerreiro, Mago ou Arqueiro).
+     - Escolher o oponente contra o qual o personagem vai lutar.
+     - O jogo deve informar os danos causados após cada ataque e exibir a vida restante dos personagens.
+     - O jogo termina quando um dos personagens for derrotado (vida menor ou igual a 0).
+
+#### Exemplo de Fluxo do Jogo:
+1. O usuário insere o nome dos personagens.
+2. O usuário escolhe um personagem para atacar e um oponente.
+3. O ataque ocorre, e o sistema informa o dano e a vida restante do oponente.
+4. O ciclo se repete até que um dos personagens seja derrotado.
+
