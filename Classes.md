@@ -123,3 +123,99 @@ Crie uma classe `Aluno` com os atributos `nome`, `matricula`, e `curso`. Crie um
 
 ### Exercício 3: Criar a Classe `Produto`
 Crie uma classe `Produto` com os atributos `nome`, `preco`, e `quantidade`. Crie um método para calcular o valor total em estoque (preço * quantidade). No `App.java`, instancie um objeto de `Produto` e exiba o valor total em estoque.
+
+
+Em Java, a **herança** permite que uma classe herde atributos e métodos de outra classe. Para isso, utilizamos a palavra-chave `extends`. A classe que herda é chamada de **classe filha** ou **subclasse**, e a classe da qual ela herda é chamada de **classe pai** ou **superclasse**.
+
+### Estrutura Básica da Herança
+
+```java
+class SuperClasse {
+    // Atributos e métodos da superclasse
+    public void metodoSuperClasse() {
+        System.out.println("Método da SuperClasse.");
+    }
+}
+
+class SubClasse extends SuperClasse {
+    // Atributos e métodos da subclasse
+    public void metodoSubClasse() {
+        System.out.println("Método da SubClasse.");
+    }
+}
+```
+
+### Exemplo Prático
+
+Vamos criar uma classe `Veiculo` e depois criar a classe `Carro` que estende `Veiculo`.
+
+#### 1. Arquivo `Veiculo.java` (Superclasse)
+
+```java
+public class Veiculo {
+    private String marca;
+
+    // Construtor
+    public Veiculo(String marca) {
+        this.marca = marca;
+    }
+
+    // Método da superclasse
+    public void exibirMarca() {
+        System.out.println("Marca do veículo: " + marca);
+    }
+}
+```
+
+#### 2. Arquivo `Carro.java` (Subclasse)
+
+A classe `Carro` vai herdar de `Veiculo` usando `extends`.
+
+```java
+public class Carro extends Veiculo {
+    private int ano;
+
+    // Construtor
+    public Carro(String marca, int ano) {
+        super(marca);  // Chama o construtor da superclasse
+        this.ano = ano;
+    }
+
+    // Método da subclasse
+    public void exibirDetalhes() {
+        exibirMarca();  // Método herdado da superclasse
+        System.out.println("Ano do carro: " + ano);
+    }
+
+    //Usado para sobrescrever o método da classe pai
+    @Override
+     public void exibirMarca() {
+        System.out.println("Marca do carro: " + marca);
+    }
+}
+```
+
+#### 3. Arquivo `App.java`
+
+Agora, vamos testar as classes no arquivo `App.java`.
+
+```java
+public class App {
+    public static void main(String[] args) {
+        // Criando um objeto Carro que herda de Veiculo
+        Carro carro = new Carro("Toyota", 2021);
+
+        // Chamando o método da subclasse
+        carro.exibirDetalhes();
+    }
+}
+```
+
+### Observação:
+
+- O método `super()` é utilizado para chamar o construtor da superclasse, permitindo a inicialização de atributos herdados.
+- Métodos e atributos herdados podem ser usados diretamente na subclasse.
+
+Dessa forma, você consegue estender uma classe em Java, reutilizando código e criando hierarquias de classes.
+
+
