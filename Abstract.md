@@ -83,75 +83,31 @@ public class FábricaDeMóveis {
 
 ---
 
-## Exercício: Sistema de Transporte
 
-### Objetivo
-Criar um sistema simples que simule diferentes tipos de transporte utilizando classes abstratas.
+**Exercício: Clãs de Konoha (Naruto)**
 
-### Instruções
+Neste exercício, você vai criar um sistema que representa os clãs de Konoha usando classes abstratas em Java. Cada clã terá suas características e especialidades, mas todos herdarão de uma classe abstrata base chamada `Cla`.
 
-1. **Criar a Classe Abstrata `Transporte`**
-   - Defina uma classe abstrata chamada `Transporte` que contém:
-     - Um atributo `capacidade` (int).
-     - Um método abstrato `transportar(int passageiros)`.
+### Requisitos:
 
-2. **Implementar as Classes de Transporte**
-   - Crie duas classes que herdam de `Transporte`:
-     - `Onibus`: 
-       - Implemente o método `transportar`, exibindo uma mensagem como "O ônibus transportou X passageiros".
-     - `Bicicleta`: 
-       - Implemente o método `transportar`, exibindo uma mensagem como "A bicicleta transportou X passageiros".
+1. Crie uma **classe abstrata** chamada `Cla` com os seguintes atributos e métodos:
+   - Atributos:
+     - `String nomeDoCla`: nome do clã.
+     - `String lider`: nome do líder atual do clã.
+   - Métodos:
+     - `public abstract void habilidadeEspecial()`: método abstrato que descreve a habilidade especial de cada clã.
+     - `public void exibirDetalhes()`: método concreto que exibe o nome do clã e o nome do líder.
 
-3. **Criar a Classe Principal**
-   - Crie uma classe chamada `Main` com um método `main` para testar suas classes.
-   - No método `main`, crie instâncias de `Onibus` e `Bicicleta`, e chame o método `transportar` com um número de passageiros.
+2. Crie as subclasses que herdam de `Cla`, representando diferentes clãs de Konoha:
+   - `ClaUchiha`: Implementa o método `habilidadeEspecial()`, que descreve o *Sharingan* como sua habilidade especial.
+   - `ClaHyuga`: Implementa o método `habilidadeEspecial()`, que descreve o *Byakugan* como sua habilidade especial.
+   - `ClaNara`: Implementa o método `habilidadeEspecial()`, que descreve a manipulação de sombras como sua habilidade especial.
+   - `ClaAkimichi`: Implementa o método `habilidadeEspecial()`, que descreve a ampliação corporal como sua habilidade especial.
 
-### Exemplo de Implementação
+3. Crie uma classe principal chamada `Konoha` que contenha o método `main`, onde você:
+   - Crie instâncias de cada clã (`ClaUchiha`, `ClaHyuga`, `ClaNara`, `ClaAkimichi`).
+   - Chame os métodos `habilidadeEspecial()` e `exibirDetalhes()` para cada clã.
 
-```java
-// Classe abstrata Transporte
-abstract class Transporte {
-    protected int capacidade;
-
-    public Transporte(int capacidade) {
-        this.capacidade = capacidade;
-    }
-
-    public abstract void transportar(int passageiros);
-}
-
-// Classe Onibus
-class Onibus extends Transporte {
-    public Onibus(int capacidade) {
-        super(capacidade);
-    }
-
-    @Override
-    public void transportar(int passageiros) {
-        System.out.println("O ônibus transportou " + passageiros + " passageiros.");
-    }
-}
-
-// Classe Bicicleta
-class Bicicleta extends Transporte {
-    public Bicicleta(int capacidade) {
-        super(capacidade);
-    }
-
-    @Override
-    public void transportar(int passageiros) {
-        System.out.println("A bicicleta transportou " + passageiros + " passageiros.");
-    }
-}
-
-// Classe principal
-public class Main {
-    public static void main(String[] args) {
-        Transporte onibus = new Onibus(50);
-        Transporte bicicleta = new Bicicleta(2);
-
-        onibus.transportar(30);  // Saída: O ônibus transportou 30 passageiros.
-        bicicleta.transportar(1); // Saída: A bicicleta transportou 1 passageiros.
-    }
-}
-```
+### Tarefas Adicionais:
+- Adicione mais clãs com suas habilidades especiais.
+- Crie um método adicional em `Cla` chamado `ataqueEspecial()` que cada clã pode personalizar para descrever um ataque exclusivo.
