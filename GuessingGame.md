@@ -8,7 +8,7 @@ Neste tutorial, você vai aprender a criar um jogo de adivinhação simples em J
 Antes de começarmos a escrever o código, você deve garantir que tem o ambiente de desenvolvimento Java configurado. Isso inclui:
 
 - **Instalar o JDK**: Se ainda não o fez, baixe e instale o Java Development Kit (JDK).
-- **IDE**: Utilize uma IDE como o **Eclipse**, **IntelliJ** ou o **VS Code** com suporte para Java.
+- **IDE**: Utilize uma IDE como o **Eclipse**, **IntelliJ**, **NetBeans** ou o **VS Code** com suporte para Java.
 
 Agora, vamos começar!
 
