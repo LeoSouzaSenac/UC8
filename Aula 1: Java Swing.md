@@ -1,131 +1,136 @@
-# Aula 1: Introdução aos Componentes Básicos do Swing
+# Aula 1: Introdução ao Swing e ao GUI Builder no NetBeans
 
-## Objetivo
-Aprender a criar uma interface gráfica simples com Java Swing usando o **GUI Builder** do NetBeans. Vamos entender como adicionar e configurar componentes básicos como **JFrame**, **JLabel**, **JButton** e **JTextField**, tanto visualmente quanto via código.
+## Objetivo da Aula
 
-## Conteúdo
+1. **Entender a estrutura básica do código Swing** gerado pelo NetBeans.
+2. **Aprender sobre JFrame, JLabel, JButton e o GUI Builder**, explicando a estrutura e a função de cada componente.
+3. **Praticar criando e personalizando uma interface gráfica** com componentes básicos usando o NetBeans.
 
-### 1. Introdução ao Swing
-O **Swing** é uma biblioteca Java para criar interfaces gráficas. Ele oferece uma série de componentes visuais como botões, rótulos, campos de texto, que podemos usar para construir aplicações desktop interativas. Usaremos o NetBeans, que tem uma ferramenta visual chamada **GUI Builder** para facilitar a criação dessas interfaces.
+---
 
-### 2. Componentes Básicos do Swing
-Na aula de hoje, vamos trabalhar com os seguintes componentes do Swing:
+### Estrutura do Código Gerado
 
-- **JFrame**: A janela principal da aplicação.
-- **JLabel**: Um rótulo para exibir texto.
-- **JButton**: Um botão clicável.
-- **JTextField**: Um campo de entrada de texto.
-
-### 3. Usando o GUI Builder no NetBeans
-O NetBeans permite a criação de interfaces gráficas de forma visual através do **GUI Builder (Matisse)**, onde você pode arrastar e soltar componentes, e o NetBeans gera automaticamente o código correspondente.
-
-## Passo a Passo para Criar a Interface Gráfica
-
-### 1. Criar o Projeto no NetBeans
-
-1. **Abra o NetBeans**.
-2. **Crie um novo projeto**:
-   - Clique em **File** > **New Project**.
-   - Selecione **Java** > **Java Application** e clique em **Next**.
-   - Dê um nome ao projeto (por exemplo, **MinhaPrimeiraInterface**) e clique em **Finish**.
-   
-### 2. Criar a Interface Gráfica Usando o GUI Builder
-
-Agora vamos usar o **GUI Builder** para criar a interface visualmente.
-
-1. **Abrir a Classe JFrame no GUI Builder**:
-   - No **Project Explorer** (lado esquerdo), clique com o botão direito na classe principal do seu projeto (que geralmente tem o mesmo nome do projeto, como `MinhaPrimeiraInterface.java`).
-   - Selecione **"Open in Designer"**. Isso abrirá a interface gráfica onde você poderá arranjar os componentes.
-
-2. **Adicionar Componentes Visualmente**:
-   - **JFrame**: A janela principal já estará criada. Você pode ajustar o título da janela clicando na janela e alterando o campo **Text** nas propriedades (no painel inferior).
-   - **JLabel**: Arraste um componente **JLabel** da **Palette** (painel à direita) e solte na janela principal. No campo **Text**, altere para "Bem-vindo ao Java Swing!".
-   - **JTextField**: Arraste um **JTextField** para a janela. Ele aparecerá como uma caixa de texto. Você pode ajustar a largura e a altura diretamente na tela.
-   - **JButton**: Arraste um **JButton** para a janela. Altere o texto do botão para "Clique Aqui".
-   
-   Quando você arrasta e solta os componentes, o NetBeans irá automaticamente gerar o código para esses componentes.
-
-3. **Visualizar em Tempo Real**:
-   - À medida que você adiciona os componentes, a interface gráfica é atualizada na tela, e você pode ver em tempo real o layout da sua janela.
-
-### 3. Gerar o Código do GUI Builder
-
-Após adicionar os componentes visualmente, o NetBeans gera o código Java automaticamente. Para ver o código gerado:
-
-1. **Volte para a aba de código**:
-   - Clique na aba **Source** na parte superior da janela do NetBeans (onde está o código fonte).
-   
-2. **Código Gerado**:
-   O NetBeans gera o código correspondente aos componentes que você adicionou visualmente. Veja o exemplo abaixo:
+Aqui está a estrutura do código gerado pelo NetBeans para uma janela básica (`JFrame`):
 
 ```java
-import javax.swing.*;
+public class NewJFrame extends javax.swing.JFrame {
 
-public class MinhaPrimeiraInterface {
-    public MinhaPrimeiraInterface() {
-        // Criando o JFrame
-        JFrame frame = new JFrame("Minha Primeira Interface");
-        frame.setSize(400, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(new FlowLayout());
-        
-        // Criando o JLabel
-        JLabel label = new JLabel("Bem-vindo ao Java Swing!");
-        frame.add(label);
-
-        // Criando o JTextField
-        JTextField textField = new JTextField(20);
-        frame.add(textField);
-
-        // Criando o JButton
-        JButton button = new JButton("Clique Aqui");
-        frame.add(button);
-
-        // Tornando o JFrame visível
-        frame.setVisible(true);
+    public NewJFrame() {
+        initComponents();
     }
 
-    public static void main(String[] args) {
-        // Chamando o construtor para exibir a interface
-        new MinhaPrimeiraInterface();
+    private void initComponents() {
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        pack();
+    }
+
+    public static void main(String args[]) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new NewJFrame().setVisible(true);
+            }
+        });
     }
 }
 ```
 
-### 4. Executar o Código
+### Explicação Passo a Passo do Código
 
-Para ver a interface em funcionamento:
+1. **Classe JFrame**: `public class NewJFrame extends javax.swing.JFrame`
+   - `JFrame` é a janela principal de uma aplicação Swing, que é a base para colocar outros componentes (botões, rótulos, caixas de texto).
+   - **Extends** significa que `NewJFrame` herda as funcionalidades de `JFrame`.
 
-1. **Clique no botão "Run" (Executar)** na parte superior do NetBeans ou pressione **F6**.
-2. O NetBeans compilará o código e abrirá a janela com os componentes que você adicionou.
+2. **Construtor NewJFrame()**:
+   - `public NewJFrame()` é o **construtor** da classe, onde a janela (`JFrame`) é inicializada chamando `initComponents()`.
+   - O método `initComponents()` é gerado automaticamente pelo NetBeans e configura todos os elementos da interface gráfica.
 
----
+3. **Configuração do Comportamento da Janela**:
+   - `setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);` configura para encerrar o programa ao fechar a janela.
 
-## Exercícios
+4. **Layout Manager**:
+   - `javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());` cria um layout (organização dos componentes) usando `GroupLayout`.
+   - `GroupLayout` permite posicionar componentes em grupos e é gerado automaticamente quando criamos uma janela em branco.
 
-### 1. **Explorando o JLabel**:
-   - Crie um novo `JLabel` com seu nome e adicione-o à interface. Tente modificar a cor e o alinhamento do texto usando o painel de propriedades.
+5. **Método pack()**:
+   - `pack()` ajusta o tamanho da janela para caber todos os componentes.
 
-### 2. **Modificando o JTextField**:
-   - Adicione um novo `JTextField` abaixo do primeiro e defina seu limite de caracteres para 10. Explore a funcionalidade para alterar o tamanho do campo de texto diretamente na interface gráfica.
-
-### 3. **Adicionando Ações ao JButton**:
-   - No código gerado pelo NetBeans, adicione uma ação ao **JButton** para que, ao clicar no botão, ele altere o texto do `JLabel` para "Você clicou no botão!".
-   - Exemplo de código para adicionar uma ação ao botão:
-   
-   ```java
-   button.addActionListener(new ActionListener() {
-       public void actionPerformed(ActionEvent e) {
-           label.setText("Você clicou no botão!");
-       }
-   });
-   ```
-
-### 4. **Explorando o Layout**:
-   - No GUI Builder, experimente alterar o **layout** da janela para `BorderLayout` ou `GridLayout`. Observe como os componentes se reposicionam na interface.
+6. **Método main()**:
+   - O método `main` inicializa e exibe a janela (`NewJFrame`) na tela. A `EventQueue` cuida para que a janela seja exibida na **Thread de Eventos** do Swing.
 
 ---
 
-## Conclusão
-Na primeira aula, você aprendeu a criar uma interface gráfica simples usando Java Swing no NetBeans. Ao utilizar o **GUI Builder**, foi possível adicionar e configurar componentes visualmente, enquanto também aprendia o código gerado para cada componente. Esse processo ajudará a entender como funciona a criação de interfaces gráficas e como personalizar o comportamento dos componentes. Nas próximas aulas, vamos explorar como adicionar interatividade e funcionalidades mais avançadas!
+## Criando a Primeira Interface com o GUI Builder
 
+Agora que entendemos o código, vamos adicionar componentes básicos usando o GUI Builder. 
+
+### Passos Práticos para Criar a Interface
+
+1. **Criar o JFrame no GUI Builder**:
+   - No NetBeans, crie um novo `JFrame Form` (`NewJFrame` já existe, então pode nomear `MinhaPrimeiraInterface`).
+   - Isso abrirá o **GUI Builder** automaticamente.
+
+2. **Adicionar Componentes**:
+   - No GUI Builder, arraste um **JLabel** para a janela e posicione-o no topo. Configure o texto para "Bem-vindo!".
+   - Arraste um **JButton** e posicione-o logo abaixo do `JLabel`. No botão, configure o texto para "Clique Aqui!".
+
+3. **Configurar Propriedades**:
+   - Selecione o `JButton` e, no painel **Properties**, altere a cor de fundo para uma cor de sua preferência.
+   - Selecione o `JLabel` e altere a fonte e o tamanho do texto para deixá-lo mais visível.
+
+### Explicação dos Componentes
+
+- **JLabel**:
+   - `JLabel` exibe um texto ou imagem. Não é interativo, ou seja, os usuários não podem clicar ou digitar nele.
+   - Serve para mostrar informações aos usuários, como títulos ou mensagens.
+
+- **JButton**:
+   - `JButton` é um botão interativo. Pode ser configurado para executar ações quando clicado.
+   - No NetBeans, você pode adicionar uma ação para o botão clicando com o botão direito > **Events > Action > actionPerformed** e escrever o código desejado.
+
+---
+
+## Exercícios Práticos
+
+1. **Exercício 1: Personalizar a Janela**
+   - Abra a janela no GUI Builder e mude o título para "Minha Primeira Interface".
+   - Aumente o tamanho da janela para 500x400 pixels (clique nas bordas e arraste ou configure em **Properties > Preferred Size**).
+
+2. **Exercício 2: Adicionar Ação ao Botão**
+   - No `JButton`, clique com o botão direito e vá para **Events > Action > actionPerformed**. 
+   - No código que se abre, adicione:
+     ```java
+     JOptionPane.showMessageDialog(this, "Olá! Você clicou no botão.");
+     ```
+   - Isso faz com que uma janela de mensagem apareça quando o botão é clicado.
+
+3. **Exercício 3: Adicionar um JTextField**
+   - No GUI Builder, arraste um **JTextField** (caixa de texto) e posicione-o ao lado do `JLabel`.
+   - Adicione um segundo botão com o texto "Exibir Texto" abaixo do `JTextField`.
+   - No segundo botão, adicione um evento `actionPerformed` e escreva o seguinte:
+     ```java
+     String texto = jTextField1.getText();
+     JOptionPane.showMessageDialog(this, "Você digitou: " + texto);
+     ```
+
+### Explicação do Exercício
+
+Esses exercícios ajudarão os alunos a entender os elementos principais de uma interface gráfica:
+
+- **Componentes** (`JLabel`, `JButton`, `JTextField`) para entrada e saída de dados.
+- **Eventos de ação** para tornar a interface interativa.
+- **Exibição de mensagens** usando `JOptionPane` para mostrar pop-ups.
+- Criado uma janela interativa que exibe mensagens ao clicar em botões e ao inserir texto.
+
+Na próxima aula, vamos explorar mais componentes, como **JPanel** (para organizar outros componentes), **JCheckBox** e **JComboBox**, para criar interfaces mais completas. 
