@@ -13,12 +13,12 @@ O jogo é ambientado em um mundo de fantasia, onde o jogador assume o papel de u
 1. **Nome do Personagem**: O jogo deve começar perguntando ao jogador qual será o nome do personagem.
   
 2. **Escolha da Classe**:
-   - O jogador deve escolher uma entre três classes: **Guerreiro**, **Mago** ou **Arqueiro**.
+   - O jogador deve escolher uma entre três classes: **Guerreiro**, **Mago** ou **Arqueiro**. (Estes são apenas exemplos, use as classes que desejar)
    - Cada classe tem habilidades específicas e valores iniciais para os atributos **força**, **vida**, **mana** e **agilidade**:
      - **Força**: Representa o dano físico causado.
      - **Vida**: Determina quanto dano o personagem pode suportar.
      - **Mana**: Controla quantas magias o personagem pode lançar.
-     - **Agilidade**: Influencia a chance de acerto dos ataques e pode permitir feitos ágeis durante a aventura.
+     - **Agilidade**: Influencia a chance de acerto dos ataques e pode permitir feitos ágeis durante a aventura. (opcional)
 
 3. **Atributos por Rolagem de Dados**:
    - Os valores dos atributos devem ser determinados pela rolagem de dados, com cada classe ganhando um número diferente de dados para cada atributo.
