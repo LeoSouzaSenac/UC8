@@ -40,7 +40,6 @@ Criar uma interface gráfica com Java Swing para gerenciar os Pokémons disponí
      1. **Adicionar Pokémon à Mochila**
      2. **Visualizar Mochila**
      3. **Remover Pokémon da Mochila**
-     4. **Sair**
 
 4. **Limitações:**
    - A mochila do treinador não pode conter mais de 6 Pokémons.
