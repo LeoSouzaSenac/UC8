@@ -19,8 +19,7 @@ Criar uma interface gráfica com Java Swing para gerenciar os Pokémons disponí
 3. **Remover Pokémon da Mochila:**
    - O treinador poderá remover um Pokémon da mochila para liberar espaço.
 
-4. **Filtrar Pokémons Disponíveis:**
-   - O treinador poderá filtrar os Pokémons disponíveis por **tipo** (Elétrico, Fogo, Água, etc.) e por **geração** (Geração 1, Geração 2, etc.).
+
 
 ---
 
