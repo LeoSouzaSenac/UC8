@@ -220,6 +220,85 @@ public class RemoverComArrayList {
     }
 }
 
+Aqui estão os métodos mais usados em um `ArrayList`, organizados por finalidade:
+
+### **Adição de Elementos**
+- **`add(E e)`**  
+  Adiciona o elemento `e` ao final do `ArrayList`.  
+  ```java
+  ArrayList<String> lista = new ArrayList<>();
+  lista.add("Elemento");
+  ```
+- **`add(int index, E element)`**  
+  Insere o elemento na posição especificada.  
+  ```java
+  lista.add(1, "Novo Elemento");
+  ```
+
+### **Remoção de Elementos**
+- **`remove(int index)`**  
+  Remove o elemento no índice especificado.  
+  ```java
+  lista.remove(0);
+  ```
+- **`remove(Object o)`**  
+  Remove a primeira ocorrência do objeto `o`.  
+  ```java
+  lista.remove("Elemento");
+  ```
+
+### **Consulta de Elementos**
+- **`get(int index)`**  
+  Retorna o elemento na posição especificada.  
+  ```java
+  String elemento = lista.get(0);
+  ```
+- **`indexOf(Object o)`**  
+  Retorna o índice da primeira ocorrência de um elemento ou `-1` se não estiver presente.  
+  ```java
+  int indice = lista.indexOf("Elemento");
+  ```
+- **`lastIndexOf(Object o)`**  
+  Retorna o índice da última ocorrência de um elemento ou `-1` se não estiver presente.  
+  ```java
+  int ultimoIndice = lista.lastIndexOf("Elemento");
+  ```
+
+### **Atualização de Elementos**
+- **`set(int index, E element)`**  
+  Substitui o elemento na posição especificada.  
+  ```java
+  lista.set(0, "Novo Valor");
+  ```
+
+### **Tamanho e Verificações**
+- **`size()`**  
+  Retorna o número de elementos na lista.  
+  ```java
+  int tamanho = lista.size();
+  ```
+- **`isEmpty()`**  
+  Retorna `true` se a lista estiver vazia.  
+  ```java
+  boolean vazia = lista.isEmpty();
+  ```
+
+### **Verificação de Contém**
+- **`contains(Object o)`**  
+  Verifica se um elemento está na lista.  
+  ```java
+  boolean contem = lista.contains("Elemento");
+  ```
+
+
+### **Limpeza**
+- **`clear()`**  
+  Remove todos os elementos da lista.  
+  ```java
+  lista.clear();
+  ```
+
+Esses são os métodos mais comumente usados para manipular `ArrayList` em Java. Cada um é útil dependendo do caso de uso no seu programa.
 
 
 ## Exercício
