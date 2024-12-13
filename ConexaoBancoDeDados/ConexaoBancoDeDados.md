@@ -18,9 +18,13 @@ Aqui estão as cinco classes que compõem a nossa aplicação:
 
 ---
 
-## 1. **ConexaoSQLite**: Conectar ao Banco de Dados
+Aqui está a explicação detalhada sobre o uso de **`try`** e **`catch`** com a adição da sua solicitação:
 
-### O que faz esta classe?
+---
+
+### 1. **ConexaoSQLite: Conectar ao Banco de Dados**
+
+#### O que faz esta classe?
 
 Esta classe tem o objetivo de estabelecer e fechar a conexão com o banco de dados SQLite. Vamos analisar o código passo a passo.
 
@@ -66,9 +70,49 @@ public class ConexaoSQLite {
 ### Explicação
 
 - **`DriverManager.getConnection(url)`**: A classe **`DriverManager`** gerencia a conexão com o banco de dados. O método **`getConnection`** cria uma conexão com o banco SQLite localizado no arquivo **`usuarios.db`**.
+  
 - **`SQLException`**: Caso aconteça algum erro, como problemas na conexão, o Java lança uma exceção **`SQLException`**, que é tratada no bloco **`catch`**.
+
 - **`conexao.close()`**: Para liberar os recursos do sistema, sempre fechamos a conexão quando terminamos de usá-la.
 
+---
+
+### **O que são `try` e `catch`?**
+
+O bloco **`try`** e **`catch`** são usados em Java (e em muitas outras linguagens de programação) para **lidar com exceções** (erros que ocorrem durante a execução do programa). Vamos entender como eles funcionam:
+
+#### 1. **`try`**:
+- O bloco **`try`** é onde colocamos o código que pode gerar uma exceção (erro). Dentro do **`try`**, o Java tenta executar o código normalmente.
+- Se o código dentro do **`try`** gerar um erro, o controle do programa passa imediatamente para o **`catch`**, onde a exceção será tratada.
+
+#### 2. **`catch`**:
+- O bloco **`catch`** é usado para capturar e tratar a exceção que ocorreu dentro do **`try`**. Se algum erro ocorrer no código dentro do **`try`**, ele será "pegado" aqui no **`catch`**, evitando que o programa trave ou se comporte de forma inesperada.
+- O **`catch`** permite que o programador defina uma resposta personalizada para o erro, como exibir uma mensagem de erro mais amigável ou realizar outras ações de recuperação.
+
+### Exemplo de como **`try`** e **`catch`** funcionam:
+
+No exemplo da classe **`ConexaoSQLite`**:
+
+```java
+try {
+    conexao = DriverManager.getConnection(url);
+    System.out.println("Conexão com SQLite estabelecida!");
+} catch (SQLException e) {
+    System.out.println("Erro ao conectar ao banco: " + e.getMessage());
+}
+```
+
+- **No bloco `try`**: O Java tenta conectar-se ao banco de dados SQLite usando o método **`getConnection`**. Se a conexão for bem-sucedida, a mensagem **"Conexão com SQLite estabelecida!"** será exibida.
+  
+- **Se ocorrer um erro (exceção)**: Se, por algum motivo, o banco de dados não puder ser acessado (como uma URL incorreta, ou problemas de rede), o Java gerará uma **`SQLException`**. O controle do programa será transferido para o **`catch`**, e a mensagem de erro será exibida na tela: **"Erro ao conectar ao banco: " + e.getMessage()**. A variável **`e`** contém detalhes sobre a exceção, como o tipo de erro e uma descrição.
+
+### Por que usar **`try`** e **`catch`**?
+
+1. **Evitar que o programa pare inesperadamente**: Se não usássemos **`try`** e **`catch`**, o programa poderia travar ao encontrar um erro, interrompendo sua execução. Usando **`try`** e **`catch`**, conseguimos tratar esses erros de maneira controlada e amigável.
+   
+2. **Fornecer feedback ao usuário**: Com o **`catch`**, podemos fornecer mensagens de erro mais amigáveis e informativas, o que melhora a experiência do usuário.
+
+3. **Manter a aplicação funcionando**: O **`catch`** permite que o programa continue executando, mesmo após um erro. Por exemplo, em vez de travar a aplicação por causa de um erro de conexão, podemos tentar reconectar ou informar ao usuário o que ocorreu.
 ---
 
 ## 2. **CriarTabela**: Criar a Tabela de Usuários
