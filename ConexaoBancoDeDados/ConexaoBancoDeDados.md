@@ -8,12 +8,13 @@ Neste tutorial, vamos criar uma aplicação Java simples que conecta a um banco 
 
 ## Estrutura do Projeto
 
-Aqui estão as quatro classes que compõem a nossa aplicação:
+Aqui estão as cinco classes que compõem a nossa aplicação:
 
 1. **ConexaoSQLite** - Responsável pela conexão com o banco de dados SQLite.
 2. **CriarTabela** - Responsável por criar a tabela de usuários no banco de dados.
 3. **InserirUsuario** - Responsável por inserir dados de novos usuários na tabela.
 4. **ListarUsuarios** - Responsável por listar todos os usuários presentes na tabela.
+5. **App** - A classe principal que orquestra a execução do programa.
 
 ---
 
@@ -192,3 +193,50 @@ public class ListarUsuarios {
 - **`rs.getInt("id")`**: Obtém o valor do campo **`id`** (que é um inteiro).
 - **`rs.getString("nome")`** e **`rs.getString("email")`**: Obtêm os valores dos campos **`nome`** e **`email`** como texto.
 - **`Exception`**: Caso ocorra algum erro ao executar a consulta ou ao percorrer os resultados, a exceção será capturada e a mensagem de erro será exibida.
+
+---
+
+## 5. **App**: A Classe Principal
+
+### O que faz esta classe?
+
+A classe **`App`** é o ponto de entrada da nossa aplicação. Ela orquestra a execução do programa, realizando as ações de conectar ao banco de dados, criar a tabela, inserir usuários e listar os usuários. Aqui está o código da classe **`App`**:
+
+### Código:
+
+```java
+package Conexao;
+
+import java.sql.Connection;
+
+public class App {
+    public static void main(String[] args) {
+        ConexaoSQLite conexaoSQLite = new ConexaoSQLite(); 
+        Connection conexao = conexaoSQLite.conectar();
+
+        if (conexao != null) {
+            // Criar tabela
+            CriarTabela.criarTabelaUsuarios(conexao);
+
+            // Inserir usuário
+            InserirUsuario.inserirUsuario(conexao, "João", "joao@email.com");
+            InserirUsuario.inserirUsuario(conexao,"Leo","leo@mail");
+
+            // Listar usuários
+            ListarUsuarios.listarUsuarios(conexao);
+
+            // Fechar conexão
+            conexaoSQLite.desconectar(conexao);
+        }
+    }
+}
+```
+
+### Explicação
+
+- **`ConexaoSQLite conexaoSQLite = new ConexaoSQLite();`**: Cria uma instância da classe **`ConexaoSQLite`**, que será usada para conectar ao banco de dados.
+- **`Connection conexao = conexaoSQLite.conectar();`**: Estabelece a conexão com o banco de dados.
+- **`CriarTabela.criarTabelaUsuarios(conexao);`**: Chama o método para criar a tabela de usuários, se ela ainda não existir.
+- **`InserirUsuario.inserirUsuario(conexao, "João", "joao@email.com");`**: Insere um novo usuário na tabela.
+- **`ListarUsuarios.listarUsuarios(conexao);`**: Exibe todos os usuários presentes na tabela.
+- **`conexaoSQLite.desconectar(conexao);`**: Fecha a conexão com o banco de dados.
