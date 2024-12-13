@@ -1,200 +1,194 @@
-# Criando uma Aplicação Java com Conexão ao Banco de Dados SQLite
+# Aplicação Java com Banco de Dados SQLite
 
-Este guia irá ensinar como criar uma aplicação simples em Java que se conecta a um banco de dados SQLite. Vamos aprender a criar a tabela no banco de dados, inserir dados e listar os dados. Tudo será explicado passo a passo para garantir que você entenda o que está acontecendo em cada parte.
+## Introdução
 
-## Estrutura do Projeto
-
-1. **Main.java**: O ponto de entrada da aplicação. Conecta-se ao banco de dados e chama os métodos para manipular a tabela e dados.
-2. **CriarTabela.java**: Método responsável por criar a tabela no banco de dados.
-3. **InserirUsuario.java**: Método para inserir novos usuários na tabela.
-4. **ListarUsuarios.java**: Método para listar todos os usuários cadastrados na tabela.
+Neste tutorial, vamos criar uma aplicação Java simples que conecta a um banco de dados SQLite e realiza algumas operações, como criar uma tabela de usuários, inserir novos usuários e listar os usuários existentes. Vamos entender como cada parte do código funciona, explicando tudo de forma clara e detalhada.
 
 ---
 
-## 1. **Main.java**
+## Estrutura do Projeto
 
-### O que é o `Main.java`?
+Aqui estão as quatro classes que compõem a nossa aplicação:
 
-O `Main.java` é o arquivo principal que vai executar a aplicação. Aqui, o banco de dados é acessado e os outros métodos são chamados para realizar as operações no banco (como criar tabela, inserir e listar usuários).
+1. **ConexaoSQLite** - Responsável pela conexão com o banco de dados SQLite.
+2. **CriarTabela** - Responsável por criar a tabela de usuários no banco de dados.
+3. **InserirUsuario** - Responsável por inserir dados de novos usuários na tabela.
+4. **ListarUsuarios** - Responsável por listar todos os usuários presentes na tabela.
+
+---
+
+## 1. **ConexaoSQLite**: Conectar ao Banco de Dados
+
+### O que faz esta classe?
+
+Esta classe tem o objetivo de estabelecer e fechar a conexão com o banco de dados SQLite. Vamos analisar o código passo a passo.
+
+### Código:
 
 ```java
+package Conexao;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class Main {
-    public static void main(String[] args) {
-        // A URL do banco de dados SQLite
-        String url = "jdbc:sqlite:meubanco.db";
-
-        // A tentativa de se conectar ao banco de dados
-        try (Connection conn = DriverManager.getConnection(url)) {
-            // Se a conexão for bem-sucedida, mostramos uma mensagem
-            System.out.println("Conexão com o banco de dados estabelecida!");
-
-            // Chamando o método para criar a tabela
-            CriarTabela.criarTabela(conn);
-
-            // Chamando o método para inserir um usuário
-            InserirUsuario.inserirUsuario(conn, "João", 25);
-
-            // Chamando o método para listar os usuários
-            ListarUsuarios.listarUsuarios(conn);
-            
+public class ConexaoSQLite {
+    // Método para conectar ao banco de dados
+    public Connection conectar() {
+        Connection conexao = null;
+        String url = "jdbc:sqlite:usuarios.db"; // Caminho para o banco de dados
+        
+        try {
+            conexao = DriverManager.getConnection(url);
+            System.out.println("Conexão com SQLite estabelecida!");
         } catch (SQLException e) {
-            // Se houver um erro de conexão, mostramos a mensagem de erro
-            System.out.println("Erro na conexão: " + e.getMessage());
+            System.out.println("Erro ao conectar ao banco: " + e.getMessage());
+        }
+        
+        return conexao;
+    }
+
+    // Método para fechar a conexão
+    public void desconectar(Connection conexao) {
+        try {
+            if (conexao != null) {
+                conexao.close();
+                System.out.println("Conexão fechada.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao fechar a conexão: " + e.getMessage());
         }
     }
 }
 ```
 
-### O que está acontecendo no código?
+### Explicação
 
-1. **Estabelecer conexão com o banco de dados**:
-   - `String url = "jdbc:sqlite:meubanco.db";` define o caminho para o banco de dados SQLite. Aqui, estamos dizendo que o banco de dados será salvo no arquivo `meubanco.db`.
-   - `Connection conn = DriverManager.getConnection(url);` tenta abrir uma conexão com o banco de dados usando a URL fornecida.
-
-2. **`try-with-resources`**:
-   - O comando `try (Connection conn = DriverManager.getConnection(url))` é um exemplo de **try-with-resources**, o que significa que, ao final do bloco de código, a conexão será automaticamente fechada, evitando que o banco de dados fique aberto por tempo indeterminado.
-
-3. **Chamando os métodos**:
-   - **`CriarTabela.criarTabela(conn)`** cria a tabela no banco de dados.
-   - **`InserirUsuario.inserirUsuario(conn, "João", 25)`** insere um usuário chamado "João" de 25 anos.
-   - **`ListarUsuarios.listarUsuarios(conn)`** lista todos os usuários cadastrados.
+- **`DriverManager.getConnection(url)`**: A classe **`DriverManager`** gerencia a conexão com o banco de dados. O método **`getConnection`** cria uma conexão com o banco SQLite localizado no arquivo **`usuarios.db`**.
+- **`SQLException`**: Caso aconteça algum erro, como problemas na conexão, o Java lança uma exceção **`SQLException`**, que é tratada no bloco **`catch`**.
+- **`conexao.close()`**: Para liberar os recursos do sistema, sempre fechamos a conexão quando terminamos de usá-la.
 
 ---
 
-## 2. **CriarTabela.java**
+## 2. **CriarTabela**: Criar a Tabela de Usuários
 
-### O que é o `CriarTabela.java`?
+### O que faz esta classe?
 
-Este arquivo contém o método responsável por criar a tabela no banco de dados caso ela não exista.
+A classe **`CriarTabela`** é responsável por criar a tabela **`usuarios`** no banco de dados. Caso a tabela já exista, o código não gera erro, graças ao comando **`IF NOT EXISTS`**.
+
+### Código:
 
 ```java
+package Conexao;
+
 import java.sql.Connection;
 import java.sql.Statement;
-import java.sql.SQLException;
 
 public class CriarTabela {
-
-    public static void criarTabela(Connection conn) {
-        String sql = "CREATE TABLE IF NOT EXISTS usuarios (" +
-                     "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                     "nome TEXT NOT NULL," +
-                     "idade INTEGER NOT NULL);";
-
-        try (Statement stmt = conn.createStatement()) {
-            stmt.execute(sql); // Executa o SQL para criar a tabela
-            System.out.println("Tabela criada com sucesso!");
-        } catch (SQLException e) {
-            System.out.println("Erro ao criar a tabela: " + e.getMessage());
+    public static void criarTabelaUsuarios(Connection conexao) {
+        String sql = "CREATE TABLE IF NOT EXISTS usuarios ("
+                   + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                   + "nome TEXT NOT NULL, "
+                   + "email TEXT NOT NULL)";
+        
+        try (Statement stmt = conexao.createStatement()) {
+            stmt.execute(sql);
+            System.out.println("Tabela 'usuarios' criada ou já existente.");
+        } catch (Exception e) {
+            System.out.println("Erro ao criar tabela: " + e.getMessage());
         }
     }
 }
 ```
 
-### O que acontece aqui?
+### Explicação
 
-1. **Definir o comando SQL para criar a tabela**:
-   - A string `sql` contém a instrução SQL que cria uma tabela chamada `usuarios` com três colunas: `id` (que é o identificador único para cada usuário), `nome` e `idade`.
-
-2. **Executar o comando SQL**:
-   - O comando `conn.createStatement()` cria um objeto `Statement` para executar o SQL.
-   - `stmt.execute(sql)` executa o comando para criar a tabela.
-
-3. **Tratamento de erro**:
-   - Caso ocorra algum erro, o `catch` captura a exceção e exibe a mensagem de erro.
+- **`CREATE TABLE IF NOT EXISTS usuarios`**: O comando SQL **`CREATE TABLE`** cria uma nova tabela. O **`IF NOT EXISTS`** garante que a tabela só será criada se ela ainda não existir, evitando erros.
+- **`Statement`**: A classe **`Statement`** é usada para executar comandos SQL no banco de dados. Aqui, ela é criada através de **`conexao.createStatement()`**.
+- **`stmt.execute(sql)`**: Executa o comando SQL que cria a tabela.
+- **`Exception`**: Se ocorrer algum erro durante a execução do SQL (por exemplo, um erro de sintaxe), o erro é capturado no bloco **`catch`** e a mensagem é exibida.
 
 ---
 
-## 3. **InserirUsuario.java**
+## 3. **InserirUsuario**: Inserir Usuário na Tabela
 
-### O que é o `InserirUsuario.java`?
+### O que faz esta classe?
 
-Este arquivo contém o método responsável por inserir dados na tabela de usuários.
+A classe **`InserirUsuario`** é responsável por inserir novos usuários na tabela **`usuarios`**. Ela recebe o nome e o e-mail do usuário como parâmetros e os insere no banco.
+
+### Código:
 
 ```java
+package Conexao;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 public class InserirUsuario {
-
-    public static void inserirUsuario(Connection conn, String nome, int idade) {
-        String sql = "INSERT INTO usuarios(nome, idade) VALUES(?, ?)";
-
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, nome); // Define o nome do usuário
-            pstmt.setInt(2, idade);   // Define a idade do usuário
-            pstmt.executeUpdate();    // Executa a inserção dos dados
+    public static void inserirUsuario(Connection conexao, String nome, String email) {
+        String sql = "INSERT INTO usuarios (nome, email) VALUES (?, ?)";
+        
+        try (PreparedStatement pstmt = conexao.prepareStatement(sql)) {
+            pstmt.setString(1, nome); // Substitui o primeiro ? por 'nome'
+            pstmt.setString(2, email); // Substitui o segundo ? por 'email'
+            pstmt.executeUpdate();
             System.out.println("Usuário inserido com sucesso!");
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("Erro ao inserir usuário: " + e.getMessage());
         }
     }
 }
 ```
 
-### O que acontece aqui?
+### Explicação
 
-1. **Definir o comando SQL para inserir dados**:
-   - A string `sql` contém o comando SQL para inserir um novo usuário na tabela `usuarios`, onde os valores de `nome` e `idade` são passados como parâmetros.
-
-2. **Preparar e executar o comando**:
-   - O **`PreparedStatement`** é usado para evitar problemas de segurança (como ataques de injeção de SQL). Ele prepara a consulta SQL, substituindo os valores `?` pelos dados fornecidos.
-   - `pstmt.setString(1, nome)` e `pstmt.setInt(2, idade)` definem os valores para o nome e idade.
-   - `pstmt.executeUpdate()` executa a inserção.
-
-3. **Tratamento de erro**:
-   - O `catch` captura erros e exibe uma mensagem de erro.
+- **`INSERT INTO usuarios (nome, email) VALUES (?, ?)`**: Este comando SQL insere dados na tabela **`usuarios`**. O **`?`** é um placeholder (marcador) que será substituído pelos valores reais.
+- **`PreparedStatement pstmt = conexao.prepareStatement(sql)`**: **`PreparedStatement`** é uma forma segura de executar comandos SQL, pois protege contra ataques de injeção de SQL.
+- **`pstmt.setString(1, nome)`**: Aqui, estamos substituindo o primeiro **`?`** pelo valor de **`nome`**.
+- **`pstmt.executeUpdate()`**: Executa o comando de inserção no banco de dados, adicionando o novo usuário.
+- **`Exception`**: Caso ocorra algum erro ao tentar inserir os dados no banco, ele será capturado e a mensagem de erro será exibida.
 
 ---
 
-## 4. **ListarUsuarios.java**
+## 4. **ListarUsuarios**: Listar Todos os Usuários
 
-### O que é o `ListarUsuarios.java`?
+### O que faz esta classe?
 
-Este arquivo contém o método responsável por listar todos os usuários cadastrados no banco de dados.
+A classe **`ListarUsuarios`** tem o objetivo de listar todos os usuários registrados na tabela **`usuarios`**. Ela executa um comando SQL para selecionar todos os registros e os imprime no console.
+
+### Código:
 
 ```java
+package Conexao;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.sql.SQLException;
 
 public class ListarUsuarios {
-
-    public static void listarUsuarios(Connection conn) {
-        String sql = "SELECT id, nome, idade FROM usuarios";
-
-        try (Statement stmt = conn.createStatement();
+    public static void listarUsuarios(Connection conexao) {
+        String sql = "SELECT * FROM usuarios";
+        
+        try (Statement stmt = conexao.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
-
+            
+            System.out.println("ID | Nome | Email");
             while (rs.next()) {
-                int id = rs.getInt("id");
-                String nome = rs.getString("nome");
-                int idade = rs.getInt("idade");
-                System.out.println("ID: " + id + ", Nome: " + nome + ", Idade: " + idade);
+                System.out.println(rs.getInt("id") + " | " + rs.getString("nome") + " | " + rs.getString("email"));
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("Erro ao listar usuários: " + e.getMessage());
         }
     }
 }
 ```
 
-### O que acontece aqui?
+### Explicação
 
-1. **Definir o comando SQL para listar dados**:
-   - A string `sql` contém o comando SQL para selecionar os dados de todos os usuários da tabela `usuarios`.
-
-2. **Executar o comando e obter os resultados**:
-   - O **`Statement`** é usado para executar a consulta SQL.
-   - **`ResultSet rs = stmt.executeQuery(sql)`** executa a consulta e armazena os resultados em um objeto `ResultSet`.
-
-3. **Exibir os resultados**:
-   - O `while (rs.next())` percorre todos os resultados, e os métodos `rs.getInt()` e `rs.getString()` são usados para obter os valores de cada coluna.
-
-4. **Tratamento de erro**:
-   - Se ocorrer algum erro durante a execução, ele é capturado e exibido.
+- **`SELECT * FROM usuarios`**: O comando SQL **`SELECT`** seleciona todos os dados da tabela **`usuarios`**. O `*` significa "todos os campos".
+- **`Statement stmt = conexao.createStatement()`**: Cria um **`Statement`** para executar o comando SQL.
+- **`ResultSet rs = stmt.executeQuery(sql)`**: Executa a consulta e armazena os resultados em um **`ResultSet`**, que é um conjunto de dados retornado pelo banco de dados.
+- **`rs.next()`**: O método **`next()`** move o cursor do **`ResultSet`** para o próximo registro. Se não houver mais registros, ele retorna **`false`**.
+- **`rs.getInt("id")`**: Obtém o valor do campo **`id`** (que é um inteiro).
+- **`rs.getString("nome")`** e **`rs.getString("email")`**: Obtêm os valores dos campos **`nome`** e **`email`** como texto.
+- **`Exception`**: Caso ocorra algum erro ao executar a consulta ou ao percorrer os resultados, a exceção será capturada e a mensagem de erro será exibida.
