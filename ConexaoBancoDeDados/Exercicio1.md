@@ -1,4 +1,4 @@
-## **Enunciado: Sistema de Gerenciamento de Usuários com SQLite**
+## **Sistema de Gerenciamento de Usuários com SQLite**
 
 ---
 
