@@ -303,4 +303,4 @@ Esses são os métodos mais comumente usados para manipular `ArrayList` em Java.
 
 ## Exercício
 ### Usando Java e Scanner, elabore um sistema simples de compras (com uma interface para produtos e pelo menos 5 classes de tipos de produtos diferentes).
-Para fazer as compras, deve haver um menu com switch, onde você deve poder adicionar e remover itens do carrinho e fazer o pagamento.
+Para fazer as compras, deve haver um menu com switch, onde você deve poder adicionar e remover itens do carrinho, ver os itens do carrinho e fazer o pagamento.
