@@ -99,10 +99,10 @@ Neste exercício, você vai criar um sistema que representa os clãs de Konoha u
      - `public void exibirDetalhes()`: método concreto que exibe o nome do clã e o nome do líder.
 
 2. Crie as subclasses que herdam de `Cla`, representando diferentes clãs de Konoha:
-   - `ClaUchiha`: Implementa o método `habilidadeEspecial()`, que descreve o *Sharingan* como sua habilidade especial.
-   - `ClaHyuga`: Implementa o método `habilidadeEspecial()`, que descreve o *Byakugan* como sua habilidade especial.
-   - `ClaNara`: Implementa o método `habilidadeEspecial()`, que descreve a manipulação de sombras como sua habilidade especial.
-   - `ClaAkimichi`: Implementa o método `habilidadeEspecial()`, que descreve a ampliação corporal como sua habilidade especial.
+   - `ClaUchiha`: Implementa o método `habilidadeEspecial()`, que descreve o *Sharingan* como sua habilidade especial. Seu líder atual é Sasuke.
+   - `ClaHyuuga`: Implementa o método `habilidadeEspecial()`, que descreve o *Byakugan* como sua habilidade especial. Seu líder atual é Hiashi.
+   - `ClaNara`: Implementa o método `habilidadeEspecial()`, que descreve a manipulação de sombras como sua habilidade especial. Seu líder atual é Shikamaru.
+   - `ClaAkimichi`: Implementa o método `habilidadeEspecial()`, que descreve a ampliação corporal como sua habilidade especial. Seu líder atual é Chouza.
 
 3. Crie uma classe principal chamada `Konoha` que contenha o método `main`, onde você:
    - Crie instâncias de cada clã (`ClaUchiha`, `ClaHyuga`, `ClaNara`, `ClaAkimichi`).
