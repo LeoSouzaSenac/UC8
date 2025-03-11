@@ -4,7 +4,7 @@
 Você foi designado para criar uma aplicação de desktop utilizando **Java Swing** que simula um sistema de gerenciamento de Pokémons. O objetivo é implementar um programa que permita ao treinador organizar sua mochila com até 6 Pokémons e visualizar os Pokémons disponíveis em diferentes categorias.
 
 ### **Objetivo:**
-Criar uma interface gráfica com Java Swing para gerenciar os Pokémons disponíveis no "banco de dados" e os Pokémons que o treinador carrega em sua mochila.
+Criar uma interface gráfica com Java Swing para gerenciar os Pokémons disponíveis no "computador" e os Pokémons que o treinador carrega em sua mochila.
 
 ### **Funcionalidades do Sistema:**
 
@@ -13,10 +13,7 @@ Criar uma interface gráfica com Java Swing para gerenciar os Pokémons disponí
    - Cada Pokémon será representado por um objeto com **nome**, **tipo**, e **nível**.
    - O treinador pode carregar no máximo **6 Pokémons** em sua mochila.
 
-2. **Ver Pokémons na Mochila:**
-   - A aplicação permitirá que o treinador visualize os Pokémons que estão atualmente na mochila.
-
-3. **Remover Pokémon da Mochila:**
+2. **Remover Pokémon da Mochila:**
    - O treinador poderá remover um Pokémon da mochila para liberar espaço.
 
 
@@ -25,8 +22,8 @@ Criar uma interface gráfica com Java Swing para gerenciar os Pokémons disponí
 
 ### **Requisitos:**
 
-1. **Banco de Dados Simulado:**
-   - O banco de dados será um **arraylist** com vários objetos, onde cada objeto representará um Pokémon com as seguintes propriedades:
+1. **Computador**
+   - O computador é uma lista com vários pokémons. Cada pokémon é um objeto da classe Pokémon, e tem as seguintes propriedades:
      - **Nome:** Nome do Pokémon (ex.: Pikachu, Charmander).
      - **Tipo:** Tipo do Pokémon (ex.: Elétrico, Fogo).
      - **Nível:** Nível inicial do Pokémon.
@@ -38,8 +35,7 @@ Criar uma interface gráfica com Java Swing para gerenciar os Pokémons disponí
 3. **Menu Principal:**
    - O menu principal deverá conter as seguintes opções:
      1. **Adicionar Pokémon à Mochila**
-     2. **Visualizar Mochila**
-     3. **Remover Pokémon da Mochila**
+     2. **Remover Pokémon da Mochila**
 
 4. **Limitações:**
    - A mochila do treinador não pode conter mais de 6 Pokémons.
