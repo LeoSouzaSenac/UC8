@@ -166,5 +166,37 @@ if (indice >= 0 && indice < numeros.length) {
 ```
 
 ## Conclusão
-O tratamento de exceções é essencial para construir programas robustos e confiáveis. Ele deve ser usado para lidar com situações inesperadas, enquanto `if` deve ser usado para verificar condições normais do código. Ao dominar essa técnica, seus alunos estarão preparados para desenvolver sistemas mais seguros e profissionais!
+O tratamento de exceções é essencial para construir programas robustos e confiáveis. Ele deve ser usado para lidar com situações inesperadas, enquanto `if` deve ser usado para verificar condições normais do código. 
+
+
+## Exercícios:
+
+### 1. **Exceção de Divisão por Zero**
+- **Objetivo:** Criar um programa que pede ao usuário dois números e faz uma divisão. Se o usuário tentar dividir por zero, o programa deve mostrar uma mensagem de erro.
+  
+**Instruções:**
+- Peça dois números inteiros ao usuário.
+- Realize a divisão e trate a exceção de divisão por zero.
+  
+---
+
+### 2. **Acesso a Índice Inválido**
+- **Objetivo:** Criar um programa que tenta acessar um índice em um array e trata a exceção caso o índice esteja fora do limite do array.
+
+**Instruções:**
+- Crie um array com 3 números.
+- Tente acessar um índice fora do tamanho do array (por exemplo, 5) e trate a exceção.
+
+---
+
+### 3. **Verificação de Idade**
+- **Objetivo:** Criar um programa que verifica a idade de uma pessoa. Se a idade for menor que 18, o programa deve lançar uma exceção personalizada.
+
+**Instruções:**
+- Crie um método que verifica se a idade é maior ou igual a 18.
+- Se for menor, lance uma exceção personalizada com a mensagem "A idade deve ser maior ou igual a 18!".
+
+
+
+
 
