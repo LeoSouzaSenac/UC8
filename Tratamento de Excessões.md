@@ -71,37 +71,68 @@ public class ExemploThrow {
 ## Tipos de Exceções
 As exceções em Java podem ser divididas em **verificadas (checked)** e **não verificadas (unchecked)**.
 
-### 1. Exceções Verificadas (Checked)
-Essas exceções devem ser tratadas obrigatoriamente pelo programa, caso contrário, ele nem vai rodar. Exemplo:
+### 1. **Exceções Verificadas (Checked Exceptions)**
+
+São aquelas que você é obrigado a tratar. Ou seja, quando você escreve um código que pode gerar esse tipo de exceção, você tem **que** informar ao compilador o que fazer se esse erro acontecer, ou então seu código não vai funcionar.
+
+Essas exceções são **mais previsíveis** e geralmente ocorrem por situações que você consegue antecipar, como **problemas ao ler um arquivo** ou **erro de conexão com o banco de dados**.
+
+- **Como lidar:** Você deve capturá-las com um bloco `try-catch` ou então **declarar que o método pode lançar essa exceção** com a palavra-chave `throws`.
+- **Exemplo de exceção verificada:** `IOException`, `SQLException`.
+
+**Exemplo de código com exceção verificada:**
 
 ```java
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.io.*;
 
-public class ExemploCheckedException {
+public class ExemploChecked {
     public static void main(String[] args) {
         try {
-            Scanner scanner = new Scanner(new File("arquivo.txt")); // Pode gerar FileNotFoundException
-        } catch (FileNotFoundException e) {
-            System.out.println("Erro: Arquivo não encontrado!");
+            // O código abaixo pode lançar uma IOException, então precisa ser tratado
+            FileReader arquivo = new FileReader("arquivo.txt");
+        } catch (IOException e) {
+            System.out.println("Erro ao tentar abrir o arquivo: " + e.getMessage());
         }
     }
 }
 ```
 
-### 2. Exceções Não Verificadas (Unchecked)
-Essas exceções são do tipo **RuntimeException** e não precisam ser tratadas obrigatoriamente.
+Neste exemplo, **IOException** é uma exceção verificada, e precisamos tratá-la para que o código funcione corretamente.
 
-Exemplo de **NullPointerException**:
+### 2. **Exceções Não Verificadas (Unchecked Exceptions)**
+
+Essas exceções são **menos previsíveis** e ocorrem **por erros de programação**, como tentar acessar um índice que não existe em um array ou tentar dividir por zero.
+
+O compilador **não obriga** você a tratá-las, mas é recomendado que você o faça. Elas geralmente indicam que algo deu errado no seu código de uma forma que não poderia ser facilmente antecipada.
+
+- **Como lidar:** Embora você não precise tratá-las obrigatoriamente, é uma boa prática tentar evitar que elas aconteçam com verificações no seu código.
+- **Exemplo de exceção não verificada:** `NullPointerException`, `ArrayIndexOutOfBoundsException`, `ArithmeticException`.
+
+**Exemplo de código com exceção não verificada:**
+
 ```java
-public class ExemploUncheckedException {
+public class ExemploUnchecked {
     public static void main(String[] args) {
-        String texto = null;
-        System.out.println(texto.length()); // Isso gera uma NullPointerException
+        int[] numeros = {1, 2, 3};
+        
+        // Aqui, tentamos acessar um índice que não existe no array, causando uma ArrayIndexOutOfBoundsException
+        System.out.println(numeros[5]);  // Lança ArrayIndexOutOfBoundsException
     }
 }
 ```
+
+Neste caso, a **ArrayIndexOutOfBoundsException** é uma exceção não verificada. Não precisamos obrigatoriamente tratá-la, mas podemos prever esse erro antes de tentar acessar índices inválidos no array.
+
+### Resumo simples:
+
+- **Exceções verificadas:** O compilador obriga você a tratar (geralmente erros previsíveis, como problemas ao acessar arquivos ou redes).
+- **Exceções não verificadas:** Não há obrigatoriedade de tratamento (geralmente erros de lógica, como divisão por zero ou índice de array fora do limite).
+
+**Exemplo prático:**
+- **Exceção verificada**: Tentativa de abrir um arquivo que não existe. (Você precisa avisar o compilador que está lidando com isso.)
+- **Exceção não verificada**: Tentativa de dividir um número por zero. (Erro de lógica no seu código, não é algo que o compilador obrigue a tratar.)
+
+Espero que tenha ficado mais claro! Se tiver mais dúvidas, é só perguntar!
 
 ## Quando usar exceções em vez de `if`?
 Nem sempre devemos substituir um `if` por tratamento de exceções. A escolha depende da situação:
