@@ -132,7 +132,6 @@ Neste caso, a **ArrayIndexOutOfBoundsException** é uma exceção não verificad
 - **Exceção verificada**: Tentativa de abrir um arquivo que não existe. (Você precisa avisar o compilador que está lidando com isso.)
 - **Exceção não verificada**: Tentativa de dividir um número por zero. (Erro de lógica no seu código, não é algo que o compilador obrigue a tratar.)
 
-Espero que tenha ficado mais claro! Se tiver mais dúvidas, é só perguntar!
 
 ## Quando usar exceções em vez de `if`?
 Nem sempre devemos substituir um `if` por tratamento de exceções. A escolha depende da situação:
