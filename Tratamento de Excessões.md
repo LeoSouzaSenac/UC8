@@ -105,7 +105,7 @@ Essas exceções são **menos previsíveis** e ocorrem **por erros de programaç
 
 O compilador **não obriga** você a tratá-las, mas é recomendado que você o faça. Elas geralmente indicam que algo deu errado no seu código de uma forma que não poderia ser facilmente antecipada.
 
-- **Como lidar:** Embora você não precise tratá-las obrigatoriamente, é uma boa prática tentar evitar que elas aconteçam com verificações no seu código.
+- **Como lidar:** Embora você não precise tratá-las obrigatoriamente, é uma boa prática tentar evitar que elas aconteçam com verificações no seu código. O que quero dizer é que você não precisa usar um bloco try-catch para tratá-las pois elas podem ser tratadas de outras maneiras, por exemplo, usando um if/else ou impedindo que um usuário digite uma int ao invés de uma string, por exemplo.
 - **Exemplo de exceção não verificada:** `NullPointerException`, `ArrayIndexOutOfBoundsException`, `ArithmeticException`.
 
 **Exemplo de código com exceção não verificada:**
@@ -121,7 +121,47 @@ public class ExemploUnchecked {
 }
 ```
 
-Neste caso, a **ArrayIndexOutOfBoundsException** é uma exceção não verificada. Não precisamos obrigatoriamente tratá-la, mas podemos prever esse erro antes de tentar acessar índices inválidos no array.
+Neste caso, a **ArrayIndexOutOfBoundsException** é uma exceção não verificada. Não precisamos obrigatoriamente tratá-la com try-catch, pois podemos prever esse erro antes de tentar acessar índices inválidos no array.
+### Para resolver o problema, ao invés de usar um try-catch como esse...###
+```java
+public class ExemploUnchecked {
+    public static void main(String[] args) {
+        int[] numeros = {1, 2, 3};
+        
+        try {
+            // Aqui, tentamos acessar um índice que não existe no array, causando uma ArrayIndexOutOfBoundsException
+            System.out.println(numeros[5]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Erro: Índice fora dos limites do array.");
+        }
+    }
+}
+
+
+```
+### podemos resolver de outra forma, por exemplo: ###
+```java
+
+public class ExemploUnchecked {
+    public static void main(String[] args) {
+        int[] numeros = {1, 2, 3};
+        int indice = 5;
+        
+        // Verificamos se o índice está dentro dos limites válidos do array
+        if (indice >= 0 && indice < numeros.length) {
+            // Se o índice for válido, acessamos o valor
+            System.out.println(numeros[indice]);
+        } else {
+            // Caso o índice seja inválido, mostramos uma mensagem de erro
+            System.out.println("Erro: Índice fora dos limites do array.");
+        }
+    }
+}
+
+
+
+```
+
 
 ### Resumo simples:
 
