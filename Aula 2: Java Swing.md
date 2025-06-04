@@ -125,8 +125,12 @@ Neste exemplo, vamos fazer com que o programa detecte quando uma tecla específi
    
    ```java
    private void btnClickMeActionPerformed(java.awt.event.ActionEvent evt) {
-       int x = (int) (Math.random() * this.getWidth());
-       int y = (int) (Math.random() * this.getHeight());
+       int maxX = this.getWidth() - btnClickMe.getWidth();
+       int maxY = this.getHeight() - btnClickMe.getHeight();
+        
+       int x = (int) (Math.random() * maxX);
+       int y = (int) (Math.random() * maxY);
+        
        btnClickMe.setLocation(x, y);
    }
    ```
